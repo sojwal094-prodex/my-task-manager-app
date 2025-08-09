@@ -5,15 +5,7 @@ import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot
 
 // Global variables provided by the environment
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = {
-  apiKey: "AIzaSyBG8YGntW5mY85Tx3FvQcKqa3Gk3TZPJP8",
-  authDomain: "task-manager-7c6f4.firebaseapp.com",
-  projectId: "task-manager-7c6f4",
-  storageBucket: "task-manager-7c6f4.firebasestorage.app",
-  messagingSenderId: "512795463333",
-  appId: "1:512795463333:web:347a95504d47dd7601c74c",
-  measurementId: "G-BXVD0DX8M5"
-};
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
 // Helper function to format date as YYYY-MM-DD string
@@ -112,9 +104,19 @@ function App() {
         setDb(firestore);
         setAuth(firebaseAuth);
 
-        if (initialAuthToken) {
-          await signInWithCustomToken(firebaseAuth, initialAuthToken);
+        // Check if initialAuthToken is truly a valid token or a placeholder
+        const isCanvasEnvironmentToken = initialAuthToken && initialAuthToken !== 'null' && initialAuthToken !== '';
+
+        if (isCanvasEnvironmentToken) {
+          try {
+            await signInWithCustomToken(firebaseAuth, initialAuthToken);
+          } catch (authError) {
+            console.warn("Custom token sign-in failed. Falling back to anonymous sign-in.", authError);
+            // This catches any custom token errors, including quota, and proceeds with anonymous
+            await signInAnonymously(firebaseAuth);
+          }
         } else {
+          // If not a valid Canvas token (e.g., local development or empty string), sign in anonymously
           await signInAnonymously(firebaseAuth);
         }
 
