@@ -4,10 +4,10 @@
   "homepage": "https://sojwal094-prodex.github.io/my-task-manager-app", 
   "description": "",
   "scripts": {
-    "start": "parcel public/index.html",
-    "build": "parcel build public/index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "parcel public/index.html",
+  "build": "parcel build public/index.html",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
