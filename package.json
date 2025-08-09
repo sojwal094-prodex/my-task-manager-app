@@ -1,6 +1,7 @@
 {
   "name": "my-task-manager-app",
   "version": "1.0.0",
+  "homepage": "https://sojwal094-prodex.github.io/my-task-manager-app", 
   "description": "",
   "scripts": {
     "start": "parcel public/index.html",

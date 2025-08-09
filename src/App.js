@@ -5,7 +5,15 @@ import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot
 
 // Global variables provided by the environment
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const firebaseConfig = {
+  apiKey: "AIzaSyBG8YGntW5mY85Tx3FvQcKqa3Gk3TZPJP8",
+  authDomain: "task-manager-7c6f4.firebaseapp.com",
+  projectId: "task-manager-7c6f4",
+  storageBucket: "task-manager-7c6f4.firebasestorage.app",
+  messagingSenderId: "512795463333",
+  appId: "1:512795463333:web:347a95504d47dd7601c74c",
+  measurementId: "G-BXVD0DX8M5"
+};
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
 // Helper function to format date as YYYY-MM-DD string
